@@ -1,0 +1,20 @@
+version: '2'
+services:
+  db:
+    container_name: postgres
+    image: postgres
+    ports:
+      - "5432:5432"
+    restart: always
+    environment:
+      POSTGRES_DB: calculatorcoin
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+  app:
+    container_name: calculator_coin
+    image: calculatorcoin:v1
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
